@@ -577,9 +577,9 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 2160, y: 1080}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -726,11 +726,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 350
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 350
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_LocalScale.x
@@ -774,11 +774,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 350
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 350
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -912,7 +912,6 @@ GameObject:
   - component: {fileID: 889402247}
   - component: {fileID: 889402248}
   - component: {fileID: 889402250}
-  - component: {fileID: 889402249}
   - component: {fileID: 889402251}
   m_Layer: 0
   m_Name: AR Session Origin
@@ -950,20 +949,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 331406154}
---- !u!114 &889402249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 889402246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f164b450a5dad491f9a3c6714216e423, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drogonPrefab: {fileID: 196076, guid: 20a769104331d8b48ac7d1ea0d49cdf3, type: 3}
-  prefabOffset: {x: 0, y: -0.1, z: 0}
 --- !u!114 &889402250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1277,7 +1262,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1007634062}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1667251056}
+        m_TargetAssemblyTypeName: DragonSelector, Assembly-CSharp
+        m_MethodName: BackToMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1007634062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1845,10 +1842,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7079bb9ca3f6b4a609e222b0f0b7f164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backToMenuButton: {fileID: 0}
+  arPanel: {fileID: 0}
+  menuPanel: {fileID: 0}
+  backToMenuButton: {fileID: 1007634059}
   joystick: {fileID: 223974226}
-  dragonPrefabs: []
-  selectionPanel: {fileID: 0}
+  dragonPrefabs:
+  - {fileID: 196076, guid: 20a769104331d8b48ac7d1ea0d49cdf3, type: 3}
+  - {fileID: 135744, guid: 4e7d7ecd1eafb1746a1fcb020505943c, type: 3}
+  - {fileID: 109776, guid: 8e302007cba46d94b970c6a0955b9628, type: 3}
+  - {fileID: 101568, guid: 59c100dd669d88f46b60555886d4dae7, type: 3}
+  selectionPanel: {fileID: 1239850422}
 --- !u!1 &1800850360
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DragonController : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    [SerializeField] private float speed = 1.0f;
 
     private FixedJoystick fixedJoystick;
     private Rigidbody rigidBody;
@@ -12,18 +12,22 @@ public class DragonController : MonoBehaviour
     private void OnEnable()
     {
         fixedJoystick = FindObjectOfType<FixedJoystick>();
-        rigidBody = gameObject.GetComponent<Rigidbody>();
+        rigidBody = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
     {
         float xVal = fixedJoystick.Horizontal;
-        float yval = fixedJoystick.Vertical;
+        float yVal = fixedJoystick.Vertical;
 
-        Vector3 movement = new Vector3(xVal, 0, yval);
+        Vector3 movement = new Vector3(xVal, 0, yVal);
         rigidBody.velocity = movement * speed;
 
-        if(xVal !=0 && yval !=0)
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(xVal,yval)*Mathf.Rad2Deg, transform.eulerAngles.z);
+        if (movement != Vector3.zero)
+        {
+            // Hareket yönüne bakmasını sağlar (başını çevirir)
+            Quaternion targetRotation = Quaternion.LookRotation(movement);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+        }
     }
 }
