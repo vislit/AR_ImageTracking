@@ -4,6 +4,58 @@ using UnityEngine;
 
 public class DragonController : MonoBehaviour
 {
+    [SerializeField] private float speed;
+
+    private FixedJoystick fixedJoystick;
+    private Rigidbody rigidBody;
+
+    private void OnEnable()
+    {
+        fixedJoystick = FindObjectOfType<FixedJoystick>();
+        rigidBody = gameObject.GetComponent<Rigidbody>();
+    }
+
+    private void FixedUpdate()
+    {
+        float xVal = fixedJoystick.Horizontal;
+        float yVal = fixedJoystick.Vertical;
+
+        Vector3 movement = new Vector3(xVal, 0, yVal);
+        rigidBody.velocity = movement * speed;
+
+        if (movement != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 0.2f);
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DragonController : MonoBehaviour
+{
     [SerializeField] private float speed = 1.0f;
 
     private FixedJoystick fixedJoystick;
@@ -30,4 +82,4 @@ public class DragonController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
         }
     }
-}
+}*/

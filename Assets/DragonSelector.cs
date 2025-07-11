@@ -6,10 +6,6 @@ using UnityEngine.SceneManagement;  // backToMenuButton için
 
 public class DragonSelector : MonoBehaviour
 {
-
-    public GameObject arPanel;
-
-    public GameObject menuPanel;
     public GameObject backToMenuButton;  // Inspector’dan atanacak
 
     public GameObject joystick; // Joystick GameObject’ini Inspector’dan atayacağız
@@ -29,7 +25,7 @@ public class DragonSelector : MonoBehaviour
         {
             spawnedDragon = Instantiate(
             dragonPrefabs[index],
-            trackedImage.transform.position + new Vector3(0, 0.1f, 0), // Yerden biraz yukarıda başlasın
+            trackedImage.transform.position + new Vector3(0, 0.001f, 0), //ejdeha hafif zeminden yukarı spawnlanır
             trackedImage.transform.rotation);
         }
 
@@ -61,16 +57,16 @@ public class DragonSelector : MonoBehaviour
 
     public void BackToMenu()
     {
-        arPanel.SetActive(false);   // AR ekranını gizle
-        menuPanel.SetActive(true);  // Menü panelini göster
-
+        // Ejderha varsa sahneden kaldır
         if (spawnedDragon != null)
-            Destroy(spawnedDragon); // Ejderhayı sahneden sil
+        Destroy(spawnedDragon);
 
+        // Sadece selection paneli geri getir
+        selectionPanel.SetActive(true);
         joystick.SetActive(false);
         backToMenuButton.SetActive(false);
 
-        trackedImage = null; // Referansı temizle ki yeniden tarama yapsın
+        trackedImage = null; // Yeniden tarama yapabilsin diye
     }
 }
 
