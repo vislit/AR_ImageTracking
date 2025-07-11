@@ -1,70 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DragonController : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    [SerializeField] private float speed = 3f;
 
     private FixedJoystick fixedJoystick;
     private Rigidbody rigidBody;
 
-    private void OnEnable()
-    {
-        fixedJoystick = FindObjectOfType<FixedJoystick>();
-        rigidBody = gameObject.GetComponent<Rigidbody>();
-    }
-
-    private void FixedUpdate()
-    {
-        float xVal = fixedJoystick.Horizontal;
-        float yVal = fixedJoystick.Vertical;
-
-        Vector3 movement = new Vector3(xVal, 0, yVal);
-        rigidBody.velocity = movement * speed;
-
-        if (movement != Vector3.zero)
-        {
-            Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
-            transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 0.2f);
-        }
-    }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class DragonController : MonoBehaviour
-{
-    [SerializeField] private float speed = 1.0f;
-
-    private FixedJoystick fixedJoystick;
-    private Rigidbody rigidBody;
-
-    private void OnEnable()
+    private void Start()
     {
         fixedJoystick = FindObjectOfType<FixedJoystick>();
         rigidBody = GetComponent<Rigidbody>();
+
+        if (rigidBody.isKinematic)
+        {
+            Debug.LogWarning("Rigidbody is set as Kinematic! Velocity won't affect the object.");
+        }
     }
 
     private void FixedUpdate()
@@ -73,13 +24,17 @@ public class DragonController : MonoBehaviour
         float yVal = fixedJoystick.Vertical;
 
         Vector3 movement = new Vector3(xVal, 0, yVal);
-        rigidBody.velocity = movement * speed;
 
-        if (movement != Vector3.zero)
+        if(movement.magnitude > 0.1f)
         {
-            // Hareket yönüne bakmasını sağlar (başını çevirir)
-            Quaternion targetRotation = Quaternion.LookRotation(movement);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+            rigidBody.velocity = movement.normalized * speed;
+
+            Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 0.2f);
+        }
+        else
+        {
+            rigidBody.velocity = Vector3.zero;
         }
     }
-}*/
+}

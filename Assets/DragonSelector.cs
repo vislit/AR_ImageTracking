@@ -65,8 +65,6 @@ public class DragonSelector : MonoBehaviour
         selectionPanel.SetActive(true);
         joystick.SetActive(false);
         backToMenuButton.SetActive(false);
-
-        trackedImage = null; // Yeniden tarama yapabilsin diye
     }
 }
 
